@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		.red{
+			width: 200px;
+			height: 200px;
+			background: red;
+		}
+	</style>
+</head>
+<body>
+	<div id="app">
+		<button @click="add">click</button>
+		<div :classObj></div>
+	</div>
+	<script src="vue.js"></script>
+	<script>
+		var vm = new Vue({
+			el:"#app",
+			data:{
+				classObj:{
+					red:false,
+				}
+				add:function(){
+					classObj.red = !classObj.red
+				}
+			}
+			
+
+
+
+		});
+	</script>
+</body>
+</html>
