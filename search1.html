@@ -3,12 +3,17 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Document</title>
+	<style>
+		.red{
+			color: red;
+		}
+	</style>
 </head>
 <body>
 	<div id="app">
 		<input type="text" v-model="msg" @keyup="filter">  <button @click="add">add</button>
 		<ul>
-			<li v-for="items in showItems">{{items}}</li>
+			<li v-for="items in showItems" :class="{red:items.active}" @click="items.active=!items.active">{{items.val}}</li>
 		</ul>
 	</div>
 	<script src="vue.js"></script>
@@ -23,18 +28,18 @@
 			methods:{
 				add:function(){
 					if(this.msg != ''){
-						this.items.push(this.msg);
+						this.items.push({val:this.msg,active:false});
 						this.msg = '';
 						this.items.sort(function(a,b){
-							return a>b;
+							return a.val>b.val;
 						});
 						this.showItems = this.items;
 					}
 				},
 				filter:function(){
 					var _msg = this.msg;
-					var arr = this.items.filter(function(val){
-						return val.indexOf(_msg) > -1
+					var arr = this.items.filter(function(obj){
+						return obj.val.indexOf(_msg) > -1
 					});
 					this.showItems = arr;
 				}
